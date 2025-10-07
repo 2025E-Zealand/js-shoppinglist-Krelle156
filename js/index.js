@@ -49,20 +49,35 @@ function startColorAnimation(id, intervalMs = 200) {
 function newListItem(id, className, text) {
     let node = document.createElement("li");
     node.id = id;
-    node.classList.add(className);
+    node.setAttribute("class", className);
     node.textContent = text;
     return node;
 }
 
-function appendlistItem(id, liNode) {
+function appendlistItem(id, liElement) {
     let list = document.getElementById(id);
+
+    list.setAttribute("class", "Aaaa")
+    changeClassAttribute(list, "Aaaa")
+
     if(!list) {
         console.log("List with id " + id + " not found.");
         return null;
     }
-    list.appendChild(liNode);
+    list.appendChild(liElement);
     return list;
 }
+
+function changeClassAttribute(element, newClass) {
+    if(!element) {
+        console.log("Element not found.");
+        return null;
+    }
+    element.setAttribute("class", newClass);
+    return element;
+}
+
+
 
 
 let newElement = newListItem("4", "healthy", "MANGO!!!");
