@@ -56,10 +56,6 @@ function newListItem(id, className, text) {
 
 function appendlistItem(id, liElement) {
     let list = document.getElementById(id);
-
-    list.setAttribute("class", "Aaaa")
-    changeClassAttribute(list, "Aaaa")
-
     if(!list) {
         console.log("List with id " + id + " not found.");
         return null;
@@ -68,7 +64,8 @@ function appendlistItem(id, liElement) {
     return list;
 }
 
-function changeClassAttribute(element, newClass) {
+function changeClassAttributeByID(id, newClass) {
+    let element = document.getElementById(id);
     if(!element) {
         console.log("Element not found.");
         return null;
@@ -77,8 +74,21 @@ function changeClassAttribute(element, newClass) {
     return element;
 }
 
+function deleteListElement(id) {
+    let element = document.getElementById(id);
+    if(!element) {
+        console.log("Element not found.");
+        return null;
+    }
+    element.remove(); //I think this removes it permanently
+    return element;
+
+}
 
 
 
 let newElement = newListItem("4", "healthy", "MANGO!!!");
 console.log(appendlistItem("list", newElement));
+changeClassAttributeByID(4, "unhealthy");
+
+setTimeout(deleteListElement, 5000, "4");
