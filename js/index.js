@@ -54,10 +54,16 @@ function newListItem(id, className, text) {
     return node;
 }
 
-function appendlistItem() {
-
+function appendlistItem(id, liNode) {
+    let list = document.getElementById(id);
+    if(!list) {
+        console.log("List with id " + id + " not found.");
+        return null;
+    }
+    list.appendChild(liNode);
+    return list;
 }
 
 
-
-console.log(newListItem("5", "healthy", "Milk"));
+let newElement = newListItem("4", "healthy", "MANGO!!!");
+console.log(appendlistItem("list", newElement));
