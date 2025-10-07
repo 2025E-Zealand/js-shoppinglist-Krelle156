@@ -80,9 +80,12 @@ function deleteListElement(id) {
         console.log("Element not found.");
         return null;
     }
+    if(element.tagName !== "LI") {
+        console.log("Element is not a list item.");
+        return null;
+    }
     element.remove(); //I think this removes it permanently
     return element;
-
 }
 
 
@@ -92,3 +95,4 @@ console.log(appendlistItem("list", newElement));
 changeClassAttributeByID(4, "unhealthy");
 
 setTimeout(deleteListElement, 5000, "4");
+setTimeout(deleteListElement, 5000, "list");
