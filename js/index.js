@@ -1,18 +1,5 @@
 let nextHealthy = false;
 
-//Write your Javascript code here
-console.log("Shoppinglist")
-
-function bob(a, b) {
-    return a + b
-}
-
-function bob_semple(a) {
-    console.log("The bob semple factory has produced " + a + " bob semples")
-}
-
-bob_semple(bob(2, 3))
-
 function randomRgb() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
@@ -28,14 +15,6 @@ function randomizeNode(id) {
     }
     node.style.backgroundColor = randomRgb()
     node.style.color = randomRgb()
-    return node
-}
-
-function newNode() {
-    let node = document.createElement("div");
-    node.id = "newNode"
-    node.textContent = "I am a new node"
-    document.body.appendChild(node)
     return node
 }
 
@@ -62,18 +41,16 @@ function appendlistItem(id, liElement) {
         console.log("List with id " + id + " not found.");
         return null;
     }
-    list.appendChild(liElement);
-    return list;
-}
-
-function changeClassAttributeByID(id, newClass) {
-    let element = document.getElementById(id);
-    if(!element) {
-        console.log("Element not found.");
+    if(liElement.tagName !== "LI") {
+        console.log("Element is not a list item.");
         return null;
     }
-    element.setAttribute("class", newClass);
-    return element;
+    if(list.tagName !== "UL" && list.tagName !== "OL") {//Assignment says only list elements appended to lists
+        console.log("Element is not a list.");
+        return null;
+    }
+    list.appendChild(liElement);
+    return list;
 }
 
 function deleteListElement(id) {
@@ -90,9 +67,32 @@ function deleteListElement(id) {
     return element;
 }
 
+function changeClassAttributeByID(id, newClass) {
+    let element = document.getElementById(id);
+    if(!element) {
+        console.log("Element not found.");
+        return null;
+    }
+    element.setAttribute("class", newClass);
+    return element;
+}
+
+function nextUniqueID() {
+    let listElements = document.getElementsByTagName("li");
+    let nextId = 0;
+    listElements = Array.from(listElements);
+    for(let item of listElements) {
+        let itemId = parseInt(item.id);
+        if(itemId >= nextId) {
+            nextId = itemId + 1;
+        }
+    }
+    return nextId;
+}
+
 document.getElementById("BUTTON!").addEventListener("click", () =>{
     let text = document.getElementById("textField1").value;
-    let newElement = newListItem(Date.now().toString(), nextHealthy? "healthy" : "unhealthy", text);
+    let newElement = newListItem(nextUniqueID().toString(), nextHealthy? "healthy" : "unhealthy", text);
     if(newElement.classList.contains("unhealthy")) {
         startColorAnimation(newElement.id);
     }
