@@ -1,3 +1,5 @@
+let nextHealthy = false;
+
 //Write your Javascript code here
 console.log("Shoppinglist")
 
@@ -81,12 +83,30 @@ function deleteListElement(id) {
         return null;
     }
     if(element.tagName !== "LI") {
-        console.log("Element is not a list item.");
+        console.log("Element is not a list item."); //Assignment says only list items...
         return null;
     }
     element.remove(); //I think this removes it permanently
     return element;
 }
+
+document.getElementById("BUTTON!").addEventListener("click", () =>{
+    let text = document.getElementById("textField1").value;
+    let newElement = newListItem(Date.now().toString(), nextHealthy? "healthy" : "unhealthy", text);
+    if(newElement.classList.contains("unhealthy")) {
+        startColorAnimation(newElement.id);
+    }
+    appendlistItem("list", newElement);
+});
+
+document.getElementById("HealthButton").addEventListener("click", () => {
+    nextHealthy = !nextHealthy;
+});
+
+let testElement = document.getElementById("1");
+testElement.addEventListener("click", () => {
+    testElement.setAttribute("hidden", "true");
+});
 
 
 
